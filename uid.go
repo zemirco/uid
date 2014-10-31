@@ -1,6 +1,6 @@
 // Package uid generates an URL safe string.
 //
-//  id, err := Uid(10)
+//  id, err := Gen(10)
 //  if err != nil {
 //    panic(err)
 //  }
@@ -15,7 +15,7 @@ import (
 
 const UIDCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-// Uid generates an URL safe string of given length.
+// Gen generates an URL safe string of given length.
 func Gen(length int) (string, error) {
 	b := make([]byte, length)
 	res := make([]string, length)
