@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const UIDCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+var UIDCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 // Gen generates an URL safe string of given length.
 func Gen(length int) (string, error) {
