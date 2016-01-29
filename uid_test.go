@@ -21,14 +21,14 @@ func TestNewBytes(t *testing.T) {
 	}
 }
 
-func benchmarkGen(i int, b *testing.B) {
+func benchmarkNew(i int, b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		New(i)
 	}
 }
 
-func BenchmarkGen1(b *testing.B)  { benchmarkGen(1, b) }
-func BenchmarkGen5(b *testing.B)  { benchmarkGen(5, b) }
-func BenchmarkGen10(b *testing.B) { benchmarkGen(10, b) }
-func BenchmarkGen20(b *testing.B) { benchmarkGen(20, b) }
-func BenchmarkGen50(b *testing.B) { benchmarkGen(50, b) }
+func BenchmarkNew1(b *testing.B)  { benchmarkNew(1, b) }
+func BenchmarkNew5(b *testing.B)  { benchmarkNew(5, b) }
+func BenchmarkNew10(b *testing.B) { benchmarkNew(10, b) }
+func BenchmarkNew20(b *testing.B) { benchmarkNew(20, b) }
+func BenchmarkNew50(b *testing.B) { benchmarkNew(50, b) }

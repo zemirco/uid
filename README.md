@@ -14,7 +14,7 @@ package main
 import "github.com/zemirco/uid"
 
 func main() {
-  id := uid.Gen(10)
+  id := uid.New(10)
   fmt.Println(id)
   // 9BZ1sApAX4
 }
@@ -27,11 +27,11 @@ func main() {
 ## Benchmark
 
 ```bash
-BenchmarkGen1   20000000  104 ns/op
-BenchmarkGen5   20000000  110 ns/op
-BenchmarkGen10  10000000  120 ns/op
-BenchmarkGen20  10000000  155 ns/op
-BenchmarkGen50   5000000  252 ns/op
+BenchmarkNew1   20000000  104 ns/op
+BenchmarkNew5   20000000  110 ns/op
+BenchmarkNew10  10000000  120 ns/op
+BenchmarkNew20  10000000  155 ns/op
+BenchmarkNew50   5000000  252 ns/op
 ```
 
 ## License
