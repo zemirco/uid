@@ -1,30 +1,46 @@
-// Package uid generates an URL safe string.
+// Package uid generates a URL safe string.
 //
-//  id, err := Gen(10)
-//  if err != nil {
-//    panic(err)
-//  }
+//  id := Gen(10)
 //  fmt.Println(id)
 //  // 9BZ1sApAX4
 package uid
 
 import (
-	"crypto/rand"
-	"strings"
+	"math/rand"
+	"time"
 )
 
-var UIDCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+// http://stackoverflow.com/questions/22892120/how-to-generate-a-random-string-of-a-fixed-length-in-golang
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-// Gen generates an URL safe string of given length.
-func Gen(length int) (string, error) {
-	b := make([]byte, length)
-	res := make([]string, length)
-	_, err := rand.Read(b)
-	if err != nil {
-		return "", err
+const (
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+)
+
+var src = rand.NewSource(time.Now().UnixNano())
+
+// New takes constant letterBytes and returns random string of length n.
+func New(n int) string {
+	return NewBytes(n, letterBytes)
+}
+
+// NewBytes takes letterBytes from parameters and returns random string of length n.
+func NewBytes(n int, lb string) string {
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
+		}
+		if idx := int(cache & letterIdxMask); idx < len(lb) {
+			b[i] = lb[idx]
+			i--
+		}
+		cache >>= letterIdxBits
+		remain--
 	}
-	for i, val := range b {
-		res[i] = string(UIDCHARS[int(val)%len(UIDCHARS)])
-	}
-	return strings.Join(res, ""), nil
+
+	return string(b)
 }

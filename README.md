@@ -14,10 +14,7 @@ package main
 import "github.com/zemirco/uid"
 
 func main() {
-  id, err := uid.Gen(10)
-  if err != nil {
-    panic(err)
-  }
+  id := uid.Gen(10)
   fmt.Println(id)
   // 9BZ1sApAX4
 }
@@ -26,6 +23,16 @@ func main() {
 ## Test
 
 `go test`
+
+## Benchmark
+
+```bash
+BenchmarkGen1   20000000  104 ns/op
+BenchmarkGen5   20000000  110 ns/op
+BenchmarkGen10  10000000  120 ns/op
+BenchmarkGen20  10000000  155 ns/op
+BenchmarkGen50   5000000  252 ns/op
+```
 
 ## License
 
